@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contagem Natal</title>
+    <style>
+        html, body {
+            height: 100vh;
+            flex: auto;
+        }
+        #countdown-text {
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="countdown-text">Loading...</h1>
+    <script>
+        (async () => {
+            const response = await fetch("/countdown");
+            const countdown = await response.json();
+            console.log(countdown);
+
+            // Ajuste aqui para acessar corretamente o elemento pelo ID
+            document.getElementById("countdown-text").innerText = `${countdown.timeUntilD.toFixed( 2 )} Days Until Christmas`;
+
+        })();
+    </script>
+</body>
+</html>

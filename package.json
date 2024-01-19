@@ -1,0 +1,24 @@
+{
+  "name": "contagemnatal",
+  "version": "1.0.0",
+  "description": "contagem para o natal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "(https://github.com/kaiodeodato/contagemNatal.git)"
+  },
+  "keywords": [
+    "contagem",
+    "node",
+    "js"
+  ],
+  "author": "kaio deodato",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.0.3",
+    "webwebweb": "^1.6.1"
+  }
+}
