@@ -4,16 +4,42 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+- master
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+jobs:
+- job: BuildAndTest
+  displayName: 'Build and Test'
+  steps:
+  - script: echo 'Starting Build and Test'
+    displayName: 'Initialize'
+    
+  - script: |
+      # Add your build commands here
+      # For example, if it's a Node.js project:
+      npm install
+      npm run build
+    displayName: 'Build'
+    
+  - script: |
+      # Add your test commands here
+      # For example, if using a test framework:
+      npm test
+    displayName: 'Run Tests'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- job: Deploy
+  displayName: 'Deploy'
+  dependsOn: BuildAndTest
+  condition: succeeded()
+  steps:
+  - script: echo 'Starting Deployment'
+    displayName: 'Initialize'
+    
+  # Add your deployment steps here
+  # For example, deploying to Azure App Service:
+  - script: |
+      az login --service-principal -u $AZURE_SP_APPID -p $AZURE_SP_PASSWORD --tenant $AZURE_TENANT_ID
+      az webapp deployment --name <your-web-app-name> --subscription <your-subscription-id> --source-path ./dist
+    displayName: 'Deploy to Azure'
